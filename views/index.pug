@@ -1,0 +1,18 @@
+extends layout.pug
+
+block content
+  h1= title
+  p Listing all books
+  p
+    a(href="/books/new") Add A New Book
+  table
+    thead
+      tr
+        th Title
+        th Author
+        th Genre
+        th Year
+    tbody
+  each book in books
+    h2= book.title
+    a(href = "/books/" + book.id) Read More &rarr;
