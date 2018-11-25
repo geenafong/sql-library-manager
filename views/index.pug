@@ -2,7 +2,7 @@ extends layout.pug
 
 block content
   h1= title
-  p Listing all books
+  h1 Books
   p
     a(href="/books/new") Add A New Book
   table
@@ -14,5 +14,9 @@ block content
         th Year
     tbody
   each book in books
-    h2= book.title
-    a(href = "/books/" + book.id) Read More &rarr;
+   tr
+    td
+        a(href=`/books/${book.id}`)= book.title
+    td=book.author
+    td=book.genre
+    td=book.year
