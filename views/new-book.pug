@@ -1,12 +1,11 @@
 extends layout
 
 block content
-  .main.container
-    .row
-        h1.display-4.m-b-2 New Book
+        h1 New Book
 
         // Book form
-        form(action='/books' method='POST')
+        form(action='/books', method='post')
+          include errors
           div.form-group
             label(for='title') Title:
             input#title.form-control(type='text', title='title' value=book.title)

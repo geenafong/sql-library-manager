@@ -2,8 +2,9 @@ extends layout
 
 block content
   h1 Update Book
-  include error
-  form(action="/books", method="post")
+  
+  form(method="post", action="/books/" + book.id)
+    include errors
 
     div.form-group
       label(for='title') Title:

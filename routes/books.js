@@ -22,9 +22,9 @@ router.get('/new', function(req, res, next) {
 
 
 /*  POST /books/new - Posts a new book to the database */
-router.post('/', function(req, res, next) {
+router.post('/new', function(req, res, next) {
     Book.create(req.body).then(function(book) {
-      res.redirect('books/' + book.id);
+      res.redirect('/books');
     }).catch(function(error){
         if(error.name === "SequelizeValidationError") {
           res.render("new-book", {book: Book.build(req.body), errors: error.errors, title: "New Book"})
@@ -39,7 +39,7 @@ router.post('/', function(req, res, next) {
 
 /* GET /books/:id - Shows book detail form */
 router.get("/:id", function(req, res, next){
-    Book.findByPk(req.params.id).then(function(book){
+    Book.findById(req.params.id).then(function(book){
       if(book) {
         res.render("update-book", {book: book, title: book.title});      
       } else {
@@ -52,7 +52,6 @@ router.get("/:id", function(req, res, next){
 
   /* POST /books/:id - Updates book info in the database */
   router.post("/:id", function(req, res, next){
-    console.log(req.params.id)
     Book.findById(req.params.id).then(function(book){
       if(book) {
         return book.update(req.body);
@@ -60,16 +59,15 @@ router.get("/:id", function(req, res, next){
         res.send(404);
       }
     }).then(function(book){
-      res.redirect("/books/" + book.id);        
+      res.redirect("/books");        
     }).catch(function(error){
         if(error.name === "SequelizeValidationError") {
           var book = Book.build(req.body);
           book.id = req.params.id;
-          res.render("books/edit", {book: book, errors: error.errors})
+          res.render("update-book", {book: book, errors: error.errors})
         } else {
           throw error;
         }
-
     }).catch(function(error){
         res.send(500, error);
      });
