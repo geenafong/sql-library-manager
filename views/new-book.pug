@@ -3,21 +3,21 @@ extends layout
 block content
         h1 New Book
 
-        // Book form
-        form(action='/books', method='post')
+        form(action='/books/new', method='post')
           include errors
+
           div.form-group
             label(for='title') Title:
-            input#title.form-control(type='text', title='title' value=book.title)
+            input(type='text', name='title' value=book.title)
           div.form-group
             label(for='author') Author:
-            input#author.form-control(type='text', author='author' value=book.author)
+            input(type='text', name='author' value=book.author)
           div.form-group
             label(for='genre') Genre:
-            input#genre.form-control(type='text', genre='genre' value=book.genre)
+            input(type='text', name='genre' value=book.genre)
           div.form-group
             label(for='year') Year:
-            input#year.form-control(type='text', year='year' value=book.year)
+            input(type='text', year='year' value=book.year)
           button.btn.btn-primary(type='submit') Create New Book
           p.
           a(href="/books") Cancel
