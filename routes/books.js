@@ -73,4 +73,20 @@ router.get("/:id", function(req, res, next){
      });
   });
 
+
+  router.post('/:id/delete', function(req, res, next) {
+    Book.findById(req.params.id).then(function(book) {
+      if(book) {
+        res.render()
+        return book.destroy()
+      } else {
+        res.send(404)
+      }
+    }).then(function() {
+      res.redirect('/books')
+    }).catch(function(err) {
+      res.send(500)
+    })
+  })
+
   module.exports = router;
