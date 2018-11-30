@@ -73,7 +73,7 @@ router.get("/:id", function(req, res, next){
      });
   });
 
-
+  /* POST /books/:id/delete - Deletes a book */
   router.post('/:id/delete', function(req, res, next) {
     Book.findById(req.params.id).then(function(book) {
       if(book) {
